@@ -3,124 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronesans Projêkt | Naveroka Kurdî</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>Ronesans Projêkt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --dark-blue: #022D44;   
-            --deep-blue: #0B1D26;   
-            --bright-yellow: #F7D200; 
-            --orange: #F18805;      
-            --light-grey: #E9ECE6;  
+            --dark-blue: #022D44;   /* الثقة والاحتراف */
+            --deep-blue: #0B1D26;   /* العمق */
+            --bright-yellow: #F7D200; /* النور والطاقة */
+            --orange: #F18805;      /* الشغف */
             --white: #FFFFFF;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            background-color: var(--light-grey);
-            color: var(--deep-blue);
+            margin: 0; 
+            background-color: #E9ECE6;
+            color: var(--dark-blue); 
+            overflow-x: hidden;
         }
 
+        /* Header & Languages */
         header {
-            background-color: var(--dark-blue);
-            color: var(--white);
-            padding: 1rem 0;
-            border-bottom: 4px solid var(--bright-yellow);
-        }
-
-        nav {
+            background: var(--dark-blue);
+            padding: 15px 5%;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            max-width: 1100px;
-            margin: auto;
+            border-bottom: 4px solid var(--bright-yellow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        /* تعديل قسم اللوغو ليناسب الصورة */
-        .logo-container img { 
-            height: 60px; 
-            display: block;
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-area img { height: 45px; }
+        .logo-area span { color: var(--bright-yellow); font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
+
+        .lang-switcher select {
+            background: var(--deep-blue);
+            color: var(--white);
+            border: 2px solid var(--bright-yellow);
+            padding: 5px 10px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        nav a {
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), var(--deep-blue));
+            color: white; 
+            text-align: center; 
+            padding: 120px 20px;
+            border-bottom: 10px solid var(--bright-yellow);
+        }
+
+        .hero h1 { font-size: 4.5rem; font-weight: 900; color: var(--bright-yellow); margin: 0; }
+        .hero p { font-size: 1.8rem; font-weight: 400; margin-top: 15px; letter-spacing: 1px; }
+
+        /* Interactive Pixel Grid */
+        .pixel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px; 
+            max-width: 1200px; 
+            margin: -50px auto 80px; 
+            padding: 0 20px;
+        }
+
+        .pixel-card {
+            background: var(--white); 
+            padding: 40px 20px; 
+            text-align: center;
+            border: 5px solid var(--dark-blue);
+            box-shadow: 10px 10px 0px var(--bright-yellow);
+            transition: all 0.2s steps(4); /* Motionly Pixel effect */
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .pixel-card h3 { 
+            margin: 0; 
+            color: var(--dark-blue); 
+            font-weight: 900; 
+            font-size: 1.5rem; 
+        }
+
+        .pixel-card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 15px 15px 0px var(--orange);
+            background: var(--bright-yellow);
+        }
+
+        /* Footer & Socials */
+        footer {
+            background: var(--deep-blue); 
+            color: white;
+            text-align: center; 
+            padding: 60px 20px;
+        }
+
+        .social-links { margin-bottom: 30px; }
+        .social-links a {
             color: var(--white);
             text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 0 15px;
+            font-size: 1.1rem;
             transition: 0.3s;
         }
+        .social-links a:hover { color: var(--bright-yellow); }
 
-        nav a:hover { color: var(--bright-yellow); }
-
-        .hero {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--deep-blue) 100%);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
+        .email-link {
+            color: var(--bright-yellow);
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px dashed var(--orange);
+            font-size: 1.2rem;
         }
 
-        .hero h1 { font-size: 4rem; font-weight: 900; margin: 0; color: var(--bright-yellow); }
-        .hero p { font-size: 1.5rem; font-weight: 400; opacity: 0.9; margin-top: 10px; }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 50px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            padding: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 2px;
-            border-top: 5px solid var(--dark-blue);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
-
-        .card:hover { 
-            transform: translateY(-10px); 
-            border-top-color: var(--orange);
-        }
-
-        .card h3 { 
-            font-weight: 700; 
-            color: var(--dark-blue); 
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--light-grey);
-            padding-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .card p { font-size: 1rem; line-height: 1.8; color: #333; }
-
-        footer {
-            background-color: var(--deep-blue);
-            color: var(--white);
-            text-align: center;
-            padding: 50px 20px;
-            margin-top: 50px;
-        }
-
-        .footer-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+        .copyright { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; }
     </style>
 </head>
 <body>
 
 <header>
-    <nav>
-        <div class="logo-container">
-            <img src="logo.png" alt="Ronesans Projêkt">
-        </div>
-        <a href="#">PERWERDE</a>
-        <a href="#">ÇAND</a>
-        <a href="#">MEDYA</a>
-        <a href="#">WERGER</a>
-    </nav>
+    <div class="logo-area">
+        <img src="logo.png" alt="Ronesans Logo">
+        <span>RONESANS PROJÊKT</span>
+    </div>
+    <div class="lang-switcher">
+        <select>
+            <option>Kurdî</option>
+            <option>العربية</option>
+            <option>English</option>
+            <option>Türkçe</option>
+            <option>Deutsch</option>
+        </select>
+    </div>
 </header>
 
 <section class="hero">
@@ -128,31 +148,23 @@
     <p>Avakirina Naveroka Kurdî ya Nûjen</p>
 </section>
 
-<div class="main-content">
-    <div class="card">
-        <h3>Naveroka Perwerdehiyê</h3>
-        <p>Fêrbûna peyvên kurdî yên nûjen, termên zanistî di warên pizîşkî, fîzîk û teknolojiyê de û amadekirina înfografîkên hêsan.</p>
-    </div>
-
-    <div class="card">
-        <h3>Naveroka Çandî</h3>
-        <p>Lêkolîn û belgekirina dîrok û çanda gelê kurd, cejn û sembolên neteweyî bi rengekî zanistî û pêbawer.</p>
-    </div>
-
-    <div class="card">
-        <h3>Naveroka Medyayê</h3>
-        <p>Sêwirandina medyaya civakî, çêkirina vîdyoyên perwerdehiyê yên kurt û belavkirina ramanên nûjen di cîhana dîjîtal de.</p>
-    </div>
-
-    <div class="card">
-        <h3>Werger û Kurdîkirin</h3>
-        <p>Kurdîkirina termên nûjen û veguherandina agahiyên zanistî yên cîhanî bo zimanê kurdî ji bo dewlemendkirina naveroka dîjîtal.</p>
-    </div>
+<div class="pixel-grid">
+    <a href="#" class="pixel-card"><h3>ZIMAN</h3></a>
+    <a href="#" class="pixel-card"><h3>ÇAND</h3></a>
+    <a href="#" class="pixel-card"><h3>MEDYA</h3></a>
+    <a href="#" class="pixel-card"><h3>ZANIST</h3></a>
+    <a href="#" class="pixel-card"><h3>FIKIR</h3></a>
 </div>
 
 <footer>
-    <p class="footer-text">Armanc: Ronesans Projêkt bibe çavkaniya sereke ya kurdiya nûjen di qada dîjîtal de.</p>
-    <p>© 2026 Ronesans Projêkt</p>
+    <div class="social-links">
+        <a href="#">X</a>
+        <a href="#">TIKTOK</a>
+        <a href="#">INSTAGRAM</a>
+        <a href="#">FACEBOOK</a>
+    </div>
+    <a href="mailto:RonesansProjekt@gmail.com" class="email-link">RonesansProjekt@gmail.com</a>
+    <p class="copyright">© 2026 Ronesans Projêkt - Bi Serbilindî hatî sêwirandin</p>
 </footer>
 
 </body>
