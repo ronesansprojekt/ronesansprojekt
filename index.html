@@ -25,7 +25,7 @@
         header {
             background-color: var(--dark-blue);
             color: var(--white);
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             border-bottom: 4px solid var(--bright-yellow);
         }
 
@@ -37,11 +37,10 @@
             margin: auto;
         }
 
-        .logo-text { 
-            font-weight: 900; 
-            font-size: 1.8rem; 
-            color: var(--bright-yellow);
-            letter-spacing: 1px;
+        /* تعديل قسم اللوغو ليناسب الصورة */
+        .logo-container img { 
+            height: 60px; 
+            display: block;
         }
 
         nav a {
@@ -114,7 +113,9 @@
 
 <header>
     <nav>
-        <div class="logo-text">RONESANS PROJÊKT</div>
+        <div class="logo-container">
+            <img src="logo.png" alt="Ronesans Projêkt">
+        </div>
         <a href="#">PERWERDE</a>
         <a href="#">ÇAND</a>
         <a href="#">MEDYA</a>
@@ -156,4 +157,3 @@
 
 </body>
 </html>
-
