@@ -31,7 +31,7 @@
         header {
             background-color: var(--dark-blue);
             color: var(--white);
-            padding: 1rem 5%;
+            padding: 1.2rem 5%;
             border-bottom: 4px solid var(--bright-yellow);
             display: flex;
             justify-content: space-between;
@@ -41,13 +41,14 @@
             z-index: 1000;
         }
 
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        .logo-area img { height: 45px; }
-        .logo-area span { font-weight: 900; font-size: 1.4rem; color: var(--bright-yellow); letter-spacing: 1px; }
+        /* تكبير اللوجو هنا */
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-area img { height: 70px; } 
+        .logo-area span { font-weight: 900; font-size: 1.6rem; color: var(--bright-yellow); letter-spacing: 1px; }
 
         .lang-switcher select {
             background: var(--deep-blue); color: white;
-            border: 1px solid var(--bright-yellow); padding: 5px 10px;
+            border: 1px solid var(--bright-yellow); padding: 8px 12px;
             font-family: inherit; cursor: pointer;
         }
 
@@ -96,12 +97,31 @@
             padding: 60px 20px;
         }
 
-        .social-icons { margin-bottom: 30px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
-        .social-link-item { display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; font-weight: 600; }
-        .social-link-item img { height: 24px; width: 24px; image-rendering: pixelated; }
-        .social-link-item:hover { color: var(--bright-yellow); }
+        .social-icons { margin-bottom: 40px; display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; }
+        
+        .social-link-item { 
+            display: flex; 
+            flex-direction: column; /* جعل الأيقونة فوق النص */
+            align-items: center; 
+            gap: 10px; 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 0.8rem;
+        }
 
-        .email-link { color: var(--bright-yellow); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--bright-yellow); }
+        /* تكبير أيقونات السوشيال ميديا هنا */
+        .social-link-item img { 
+            height: 40px; 
+            width: 40px; 
+            image-rendering: pixelated; 
+            transition: transform 0.3s steps(4);
+        }
+
+        .social-link-item:hover { color: var(--bright-yellow); }
+        .social-link-item:hover img { transform: scale(1.2); }
+
+        .email-link { color: var(--bright-yellow); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--bright-yellow); font-size: 1.2rem; }
         .copyright { margin-top: 40px; font-size: 0.8rem; opacity: 0.5; }
     </style>
 </head>
@@ -151,10 +171,10 @@
 
 <footer>
     <div class="social-icons">
-        <a href="#" class="social-link-item"><img src="x-icon.png" alt="X"> X</a>
-        <a href="#" class="social-link-item"><img src="tiktok-icon.png" alt="TikTok"> TikTok</a>
-        <a href="#" class="social-link-item"><img src="instagram-icon.png" alt="Instagram"> Instagram</a>
-        <a href="#" class="social-link-item"><img src="facebook-icon.png" alt="Facebook"> Facebook</a>
+        <a href="#" class="social-link-item"><img src="x-icon.png" alt="X"><span>X</span></a>
+        <a href="#" class="social-link-item"><img src="tiktok-icon.png" alt="TikTok"><span>TikTok</span></a>
+        <a href="#" class="social-link-item"><img src="instagram-icon.png" alt="Instagram"><span>Instagram</span></a>
+        <a href="#" class="social-link-item"><img src="facebook-icon.png" alt="Facebook"><span>Facebook</span></a>
     </div>
     <a href="mailto:RonesansProjekt@gmail.com" class="email-link">RonesansProjekt@gmail.com</a>
     <p class="copyright">© 2026 Ronesans Projêkt - BER BI PÊŞEROJÊ VE</p>
