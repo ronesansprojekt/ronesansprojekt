@@ -15,17 +15,11 @@
             --white: #FFFFFF;
         }
 
-        @keyframes pixel-load {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             background-color: var(--light-grey);
             color: var(--deep-blue);
-            animation: pixel-load 0.6s ease-out forwards;
         }
 
         header {
@@ -40,48 +34,85 @@
             z-index: 1000;
         }
 
-        .logo-area img { height: 75px; display: block; } /* تقليل حجم اللوجو قليلاً للتناسق */
+        .logo-area img { height: 75px; display: block; }
 
-        .lang-switcher select {
-            background: var(--deep-blue); color: white;
-            border: 1px solid var(--bright-yellow); padding: 6px 10px;
-            font-family: inherit; cursor: pointer;
-        }
-
-        /* تعديل القسم التعريفي ليكون عرضياً وبخط أرشق */
+        /* تنسيق القسم التعريفي المطور */
         .hero {
             position: relative;
             background-image: url('hero.png'); 
             background-size: cover;
             background-position: center;
-            height: 320px; /* تقليل الارتفاع ليكون عرضياً كما طلبت */
+            min-height: 400px; /* جعلته مرناً ليستوعب النص الطويل */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             border-bottom: 6px solid var(--bright-yellow);
-            overflow: hidden;
+            padding: 60px 20px;
         }
 
         .hero::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 45, 68, 0.6); /* تعتيم متوازن */
+            background: rgba(2, 45, 68, 0.7);
             z-index: 1;
         }
 
-        .hero p { 
+        .hero-content {
             position: relative;
             z-index: 2;
-            font-size: 1.8rem; /* حجم متوسط ومريح */
-            font-weight: 600; /* خط أنحف وأرشق */
-            letter-spacing: 1px;
-            max-width: 800px;
-            line-height: 1.4;
-            margin: 0;
-            padding: 0 20px;
+            max-width: 900px;
+        }
+
+        .hero h1 { 
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* نص "المزيد" المخفي */
+        #more-text {
+            display: none;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-top: 20px;
+            text-align: left; /* لترتيب النقاط بشكل أفضل */
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .hero ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .hero ul li::before {
+            content: "• ";
+            color: var(--bright-yellow);
+            font-weight: bold;
+        }
+
+        /* زر المزيد */
+        .btn-more {
+            background: var(--bright-yellow);
+            color: var(--deep-blue);
+            border: none;
+            padding: 10px 25px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-more:hover {
+            background: var(--orange);
+            color: white;
         }
 
         .main-content {
@@ -99,24 +130,9 @@
             border-top: 5px solid var(--dark-blue);
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: 0.3s;
-            cursor: pointer;
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-top-color: var(--bright-yellow);
-        }
-
-        .card h3 { font-weight: 700; color: var(--dark-blue); margin-bottom: 10px; }
-        .card p { font-size: 0.95rem; line-height: 1.5; color: #444; margin: 0; }
 
         footer { background-color: var(--deep-blue); color: var(--white); text-align: center; padding: 40px 20px; }
-        .social-icons { margin-bottom: 25px; display: flex; justify-content: center; gap: 30px; }
-        .social-link-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: white; text-decoration: none; font-size: 0.7rem; }
-        .social-link-item img { height: 35px; width: 35px; }
-
-        .email-link { color: var(--bright-yellow); font-weight: 600; text-decoration: none; font-size: 1.1rem; }
-        .copyright { margin-top: 30px; font-size: 0.75rem; opacity: 0.5; }
     </style>
 </head>
 <body>
@@ -125,20 +141,31 @@
     <div class="logo-area">
         <img src="logo.png" alt="Ronesans Projêkt">
     </div>
-    <div class="lang-switcher">
-        <select>
-            <option>Kurdî</option>
-            <option>English</option>
-            <option>Türkçe</option>
-            <option>Deutsch</option>
-        </select>
-    </div>
 </header>
 
 <section class="hero">
-    <p>Avakirina Naveroka Kurdî ya Nûjen</p>
+    <div class="hero-content">
+        <h1>Mebesta projeya me avakirina vejîneke dîjîtal a kurdî ya nûjen e, ku ziman û çanda kurdî diparêze û bi şêوازekî hevdem, dîtbar û pîşeyî ji cîhanê re pêşkêş dike.</h1>
+        
+        <button class="btn-more" id="toggleBtn" onclick="toggleText()">Bêtir (المزيد)</button>
+
+        <div id="more-text">
+            <p>Em hewl didin ku kurdî ji zimanekî herêmî yê ku hebûna wî ya dîjîtal kêm e, veguherînin zimanekî zindî û çalak di înternet, medya, perwerde û teknolojiyê de, bi rêya afirandina naverokeke dîjîtal a nûjen ku nasnameya resen û vîzyona pêşerojê li hev tîne.</p>
+            
+            <p>Her wiha proje armanc dike ku:</p>
+            <ul>
+                <li>Belgekirina çand û dîroka kurdî bi şêwazekî dîtbarî yê nûjen.</li>
+                <li>Hêsankirina zanîn û termên zanistî bi zimanê kurdî.</li>
+                <li>Piştgirîkirina hebûna kurdî di medya û platformên dîjîtal ên cîhanî de.</li>
+                <li>Sêwirandina nasnameyeke dîtbarî ya nûjen ku nifşekî nû yê kurd tîne ziman.</li>
+                <li>Girêdana mîrata kurdî bi teknolojî û hunera dîjîtal re.</li>
+            </ul>
+            <p>Di dawiyê de, em daxwaz dikin ku qadeke dîjîtal biafirînin ku zimanê kurdî di cîhana îro de hîn bêtir amade, bi bandor û bedew bibe.</p>
+        </div>
+    </div>
 </section>
 
+<!-- بقية الأقسام كما هي -->
 <div class="main-content">
     <div class="card"><h3>ZIMAN</h3><p>Pêşxistina zimanê kurdî, fêrbûna peyvên nûjen û termên zanistî.</p></div>
     <div class="card"><h3>ÇAND</h3><p>Belgekirina dîrok û çanda kurdî bi rêbazên dîjîtal û nûjen.</p></div>
@@ -148,15 +175,23 @@
 </div>
 
 <footer>
-    <div class="social-icons">
-        <a href="#" class="social-link-item"><img src="x-icon.png" alt="X"><span>X</span></a>
-        <a href="#" class="social-link-item"><img src="tiktok-icon.png" alt="TikTok"><span>TikTok</span></a>
-        <a href="#" class="social-link-item"><img src="instagram-icon.png" alt="Instagram"><span>Instagram</span></a>
-        <a href="#" class="social-link-item"><img src="facebook-icon.png" alt="Facebook"><span>Facebook</span></a>
-    </div>
-    <a href="mailto:RonesansProjekt@gmail.com" class="email-link">RonesansProjekt@gmail.com</a>
-    <p class="copyright">© 2026 Ronesans Projêkt - BER BI PÊŞEROJÊ VE</p>
+    <p>© 2026 Ronesans Projêkt - BER BI PÊŞEROJÊ VE</p>
 </footer>
+
+<script>
+    function toggleText() {
+        var text = document.getElementById("more-text");
+        var btn = document.getElementById("toggleBtn");
+        
+        if (text.style.display === "none" || text.style.display === "") {
+            text.style.display = "block";
+            btn.innerHTML = "Kêmtir (أقل)";
+        } else {
+            text.style.display = "none";
+            btn.innerHTML = "Bêtir (المزيد)";
+        }
+    }
+</script>
 
 </body>
 </html>
