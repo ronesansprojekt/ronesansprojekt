@@ -4,32 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ronesans Projêkt</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --dark-blue: #022D44;   /* الثقة والاحتراف */
-            --deep-blue: #0B1D26;   /* العمق */
-            --bright-yellow: #F7D200; /* النور والطاقة */
-            --orange: #F18805;      /* الشغف */
+            --dark-blue: #022D44;   
+            --deep-blue: #0B1D26;   
+            --bright-yellow: #F7D200; 
+            --orange: #F18805;      
+            --light-grey: #E9ECE6;  
             --white: #FFFFFF;
+        }
+
+        @keyframes pixel-in {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            margin: 0; 
-            background-color: #E9ECE6;
-            color: var(--dark-blue); 
-            overflow-x: hidden;
+            margin: 0;
+            background-color: var(--light-grey);
+            color: var(--deep-blue);
+            animation: pixel-in 0.8s ease-out forwards;
         }
 
-        /* Header & Languages */
         header {
-            background: var(--dark-blue);
-            padding: 15px 5%;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 1rem 5%;
+            border-bottom: 4px solid var(--bright-yellow);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid var(--bright-yellow);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -37,92 +43,66 @@
 
         .logo-area { display: flex; align-items: center; gap: 12px; }
         .logo-area img { height: 45px; }
-        .logo-area span { color: var(--bright-yellow); font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
+        .logo-area span { font-weight: 900; font-size: 1.4rem; color: var(--bright-yellow); letter-spacing: 1px; }
 
         .lang-switcher select {
-            background: var(--deep-blue);
-            color: var(--white);
-            border: 2px solid var(--bright-yellow);
-            padding: 5px 10px;
-            font-family: inherit;
-            font-weight: 600;
-            cursor: pointer;
+            background: var(--deep-blue); color: white;
+            border: 1px solid var(--bright-yellow); padding: 5px 10px;
+            font-family: inherit; cursor: pointer;
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--dark-blue), var(--deep-blue));
-            color: white; 
-            text-align: center; 
-            padding: 120px 20px;
-            border-bottom: 10px solid var(--bright-yellow);
-        }
-
-        .hero h1 { font-size: 4.5rem; font-weight: 900; color: var(--bright-yellow); margin: 0; }
-        .hero p { font-size: 1.8rem; font-weight: 400; margin-top: 15px; letter-spacing: 1px; }
-
-        /* Interactive Pixel Grid */
-        .pixel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px; 
-            max-width: 1200px; 
-            margin: -50px auto 80px; 
-            padding: 0 20px;
-        }
-
-        .pixel-card {
-            background: var(--white); 
-            padding: 40px 20px; 
+            color: white;
+            padding: 100px 20px;
             text-align: center;
-            border: 5px solid var(--dark-blue);
-            box-shadow: 10px 10px 0px var(--bright-yellow);
-            transition: all 0.2s steps(4); /* Motionly Pixel effect */
+            border-bottom: 8px solid var(--bright-yellow);
+        }
+
+        .hero p { font-size: 1.8rem; font-weight: 400; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-top: 5px solid var(--dark-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             text-decoration: none;
         }
 
-        .pixel-card h3 { 
-            margin: 0; 
-            color: var(--dark-blue); 
-            font-weight: 900; 
-            font-size: 1.5rem; 
+        .card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--bright-yellow);
+            box-shadow: 10px 10px 0px var(--orange);
         }
 
-        .pixel-card:hover {
-            transform: translate(-5px, -5px);
-            box-shadow: 15px 15px 0px var(--orange);
-            background: var(--bright-yellow);
-        }
+        .card h3 { font-weight: 900; color: var(--dark-blue); margin-bottom: 15px; font-size: 1.5rem; }
+        .card p { font-size: 1rem; line-height: 1.7; color: #333; margin: 0; }
 
-        /* Footer & Socials */
         footer {
-            background: var(--deep-blue); 
-            color: white;
-            text-align: center; 
+            background-color: var(--deep-blue);
+            color: var(--white);
+            text-align: center;
             padding: 60px 20px;
         }
 
-        .social-links { margin-bottom: 30px; }
-        .social-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 700;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            transition: 0.3s;
-        }
-        .social-links a:hover { color: var(--bright-yellow); }
+        .social-icons { margin-bottom: 30px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+        .social-link-item { display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; font-weight: 600; }
+        .social-link-item img { height: 24px; width: 24px; image-rendering: pixelated; }
+        .social-link-item:hover { color: var(--bright-yellow); }
 
-        .email-link {
-            color: var(--bright-yellow);
-            font-weight: 700;
-            text-decoration: none;
-            border-bottom: 2px dashed var(--orange);
-            font-size: 1.2rem;
-        }
-
-        .copyright { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; }
+        .email-link { color: var(--bright-yellow); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--bright-yellow); }
+        .copyright { margin-top: 40px; font-size: 0.8rem; opacity: 0.5; }
     </style>
 </head>
 <body>
@@ -135,7 +115,6 @@
     <div class="lang-switcher">
         <select>
             <option>Kurdî</option>
-            <option>العربية</option>
             <option>English</option>
             <option>Türkçe</option>
             <option>Deutsch</option>
@@ -144,27 +123,41 @@
 </header>
 
 <section class="hero">
-    <h1>Ronesans Projêkt</h1>
     <p>Avakirina Naveroka Kurdî ya Nûjen</p>
 </section>
 
-<div class="pixel-grid">
-    <a href="#" class="pixel-card"><h3>ZIMAN</h3></a>
-    <a href="#" class="pixel-card"><h3>ÇAND</h3></a>
-    <a href="#" class="pixel-card"><h3>MEDYA</h3></a>
-    <a href="#" class="pixel-card"><h3>ZANIST</h3></a>
-    <a href="#" class="pixel-card"><h3>FIKIR</h3></a>
+<div class="main-content">
+    <div class="card">
+        <h3>ZIMAN</h3>
+        <p>Pêşxistina zimanê kurdî, fêrbûna peyvên nûjen û termên zanistî.</p>
+    </div>
+    <div class="card">
+        <h3>ÇAND</h3>
+        <p>Belgekirina dîrok û çanda kurdî bi rêbazên dîjîtal û nûjen.</p>
+    </div>
+    <div class="card">
+        <h3>MEDYA</h3>
+        <p>Sêwirandina naveroka dîtbarî û vîdyoyên perwerdehiyê yên pîşeyî.</p>
+    </div>
+    <div class="card">
+        <h3>ZANIST</h3>
+        <p>Veguherandina agahiyên zanistî yên cîhanî bo zimanê kurdî.</p>
+    </div>
+    <div class="card">
+        <h3>FIKIR</h3>
+        <p>Belavkirina ramanên nûjen û afirandina bingehek ji bo ramanweriya kurdî.</p>
+    </div>
 </div>
 
 <footer>
-    <div class="social-links">
-        <a href="#">X</a>
-        <a href="#">TIKTOK</a>
-        <a href="#">INSTAGRAM</a>
-        <a href="#">FACEBOOK</a>
+    <div class="social-icons">
+        <a href="#" class="social-link-item"><img src="x-icon.png" alt="X"> X</a>
+        <a href="#" class="social-link-item"><img src="tiktok-icon.png" alt="TikTok"> TikTok</a>
+        <a href="#" class="social-link-item"><img src="instagram-icon.png" alt="Instagram"> Instagram</a>
+        <a href="#" class="social-link-item"><img src="facebook-icon.png" alt="Facebook"> Facebook</a>
     </div>
     <a href="mailto:RonesansProjekt@gmail.com" class="email-link">RonesansProjekt@gmail.com</a>
-    <p class="copyright">© 2026 Ronesans Projêkt - Bi Serbilindî hatî sêwirandin</p>
+    <p class="copyright">© 2026 Ronesans Projêkt - BER BI PÊŞEROJÊ VE</p>
 </footer>
 
 </body>
