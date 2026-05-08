@@ -15,9 +15,10 @@
             --white: #FFFFFF;
         }
 
-        @keyframes pixel-in {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+        /* Subtle Pixel Motion */
+        @keyframes pixel-load {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         body {
@@ -25,13 +26,12 @@
             margin: 0;
             background-color: var(--light-grey);
             color: var(--deep-blue);
-            animation: pixel-in 0.8s ease-out forwards;
+            animation: pixel-load 0.6s ease-out forwards;
         }
 
         header {
             background-color: var(--dark-blue);
-            color: var(--white);
-            padding: 1.2rem 5%;
+            padding: 1rem 5%;
             border-bottom: 4px solid var(--bright-yellow);
             display: flex;
             justify-content: space-between;
@@ -41,33 +41,34 @@
             z-index: 1000;
         }
 
-        /* تكبير اللوجو هنا */
-        .logo-area { display: flex; align-items: center; gap: 15px; }
-        .logo-area img { height: 70px; } 
-        .logo-area span { font-weight: 900; font-size: 1.6rem; color: var(--bright-yellow); letter-spacing: 1px; }
+        /* تعديل حجم اللوجو بعد إزالة النص */
+        .logo-area img { 
+            height: 90px; /* حجم كبير وواضح للوجو الجديد */
+            display: block;
+        }
 
         .lang-switcher select {
             background: var(--deep-blue); color: white;
             border: 1px solid var(--bright-yellow); padding: 8px 12px;
-            font-family: inherit; cursor: pointer;
+            font-family: inherit; cursor: pointer; border-radius: 0;
         }
 
         .hero {
             background: linear-gradient(135deg, var(--dark-blue), var(--deep-blue));
             color: white;
-            padding: 100px 20px;
+            padding: 80px 20px;
             text-align: center;
-            border-bottom: 8px solid var(--bright-yellow);
+            border-bottom: 6px solid var(--bright-yellow);
         }
 
-        .hero p { font-size: 1.8rem; font-weight: 400; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
+        .hero p { font-size: 1.6rem; font-weight: 400; letter-spacing: 2px; margin: 0; }
 
         .main-content {
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 50px auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
             padding: 20px;
         }
 
@@ -75,53 +76,66 @@
             background: white;
             padding: 40px;
             border-top: 5px solid var(--dark-blue);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             text-decoration: none;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-top-color: var(--bright-yellow);
-            box-shadow: 10px 10px 0px var(--orange);
+            box-shadow: 12px 12px 0px var(--orange);
         }
 
-        .card h3 { font-weight: 900; color: var(--dark-blue); margin-bottom: 15px; font-size: 1.5rem; }
-        .card p { font-size: 1rem; line-height: 1.7; color: #333; margin: 0; }
+        .card h3 { font-weight: 900; color: var(--dark-blue); margin-bottom: 12px; font-size: 1.4rem; }
+        .card p { font-size: 1rem; line-height: 1.6; color: #333; margin: 0; }
 
         footer {
             background-color: var(--deep-blue);
             color: var(--white);
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
         }
 
-        .social-icons { margin-bottom: 40px; display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; }
+        .social-icons { 
+            margin-bottom: 35px; 
+            display: flex; 
+            justify-content: center; 
+            gap: 40px; 
+            flex-wrap: wrap; 
+        }
         
         .social-link-item { 
             display: flex; 
-            flex-direction: column; /* جعل الأيقونة فوق النص */
+            flex-direction: column; 
             align-items: center; 
-            gap: 10px; 
+            gap: 8px; 
             color: white; 
             text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        /* تكبير أيقونات السوشيال ميديا هنا */
+        /* حجم أيقونات السوشيال ميديا الموحد */
         .social-link-item img { 
-            height: 40px; 
-            width: 40px; 
+            height: 45px; 
+            width: 45px; 
             image-rendering: pixelated; 
-            transition: transform 0.3s steps(4);
+            transition: transform 0.2s;
         }
 
+        .social-link-item:hover img { transform: scale(1.15); }
         .social-link-item:hover { color: var(--bright-yellow); }
-        .social-link-item:hover img { transform: scale(1.2); }
 
-        .email-link { color: var(--bright-yellow); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--bright-yellow); font-size: 1.2rem; }
+        .email-link { 
+            color: var(--bright-yellow); 
+            font-weight: 700; 
+            text-decoration: none; 
+            border-bottom: 1px dashed var(--bright-yellow); 
+            font-size: 1.2rem;
+        }
+
         .copyright { margin-top: 40px; font-size: 0.8rem; opacity: 0.5; }
     </style>
 </head>
@@ -129,8 +143,7 @@
 
 <header>
     <div class="logo-area">
-        <img src="logo.png" alt="Ronesans Logo">
-        <span>RONESANS PROJÊKT</span>
+        <img src="logo.png" alt="Ronesans Projêkt">
     </div>
     <div class="lang-switcher">
         <select>
