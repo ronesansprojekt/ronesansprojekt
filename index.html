@@ -424,26 +424,16 @@
             nûjen, dîtbarî û profesyonel ji nû ve bîne pêşiya cîhanê.  
         </h1>  
 
-     <script>
-function toggleMore(btn) {
+     <p class="content">
+  Ev beş di derbarê zimanê kurdî de ye...
+  <span class="more-text">
+    Ev beş di nav de agahdariyên zêde hene ku di destpêkê de nayên nîşandan.
+  </span>
+</p>
 
-    const moreText = document.querySelector("#heroMore .more-text");
-    const box = document.getElementById("heroMore");
-
-    if (moreText.style.display === "inline") {
-
-        moreText.style.display = "none";
-        box.style.display = "none";
-        btn.textContent = "ZÊDETIR";
-
-    } else {
-
-        box.style.display = "block";
-        moreText.style.display = "inline";
-        btn.textContent = "KÊMTIR";
-    }
-}
-</script>  
+<button class="more-btn" onclick="toggleMore(this)">
+  Zêdetir
+</button>  
 
         <div class="hero-more" id="heroMore">  
 
