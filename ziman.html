@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ku" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziman | Ronesans Projêkt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #022D44;
+            --deep-blue: #0B1D26;
+            --bright-yellow: #F7D200;
+            --light-grey: #E9ECE6;
+            --white: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light-grey);
+            color: var(--deep-blue);
+        }
+
+        /* Header */
+        header {
+            background: var(--dark-blue);
+            padding: 1.5rem 5%;
+            border-bottom: 4px solid var(--bright-yellow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            color: var(--bright-yellow);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid var(--bright-yellow);
+            padding: 5px 15px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--bright-yellow);
+            color: var(--dark-blue);
+        }
+
+        /* Hero Ziman */
+        .ziman-hero {
+            background: var(--dark-blue);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .ziman-hero h1 { font-size: 2.5rem; margin: 0; font-weight: 800; }
+        .ziman-hero p { opacity: 0.8; margin-top: 10px; }
+
+        /* Search Section */
+        .search-container {
+            max-width: 800px;
+            margin: -40px auto 40px;
+            padding: 0 20px;
+        }
+
+        .search-wrapper {
+            background: white;
+            padding: 10px;
+            display: flex;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        #searchInput {
+            flex: 1;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Dictionary Results */
+        .dictionary-grid {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .term-card {
+            background: white;
+            padding: 25px;
+            border-left: 6px solid var(--dark-blue);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .term-card:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--bright-yellow);
+        }
+
+        .en-term { font-size: 0.8rem; color: #888; font-weight: 600; text-transform: uppercase; }
+        .ku-term { font-size: 1.4rem; color: var(--dark-blue); font-weight: 700; margin: 5px 0; }
+        .def { font-size: 0.9rem; color: #555; line-height: 1.5; }
+
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-btn">← VEGERÎYAN</a>
+    <div style="color: white; font-weight: 700;">RONESANS / ZIMAN</div>
+</header>
+
+<section class="ziman-hero">
+    <h1>Navenda Ziman</h1>
+    <p>Ferhenga Termên Nûjen û Teknolojiya Dîjîtal</p>
+</section>
+
+<div class="search-container">
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Li peyvekê bigere (Software, Dîjîtal...)" onkeyup="searchDictionary()">
+    </div>
+</div>
+
+<div class="dictionary-grid" id="dictionaryGrid">
+    <!-- سيتم تعبئة البيانات بواسطة JavaScript -->
+</div>
+
+<script>
+    // قاعدة بيانات المصطلحات (يمكنك إضافة المزيد هنا بسهولة)
+    const terms = [
+        { en: "Digital", ku: "Dîjîtal", def: "Diyardeyên ku li ser bingeha sîstema sîfiran û yekxan (0-1) ava dibin." },
+        { en: "Software", ku: "Nermalav", def: "Bername û daneyên ku sîstema kompîturê didin xebatê." },
+        { en: "Artificial Intelligence", ku: "Zehniyeta Destkird", def: "Şiyana makîneyan a ji bo fêrbûn û ramanê wekî mirovan." },
+        { en: "Content", ku: "Naverok", def: "Agahî, nivîs, vîdyo an wêneyên ku di platformekê de têne weşandin." },
+        { en: "Interface", ku: "Rûkar", def: "Beşa ku bikarhêner pê re dikeve têkiliyê (wek rûyê malperê)." },
+        { en: "Database", ku: "Bingehdane", def: "Komkirina zanyariyan bi rengekî rêkûpêk ku bi hêsanî tê bikar anîn." },
+        { en: "Visual Identity", ku: "Nasnameya Dîtbarî", def: "Sêwirandin û rengên ku sembola proje an pargîdaniyekê ne." },
+        { en: "Innovation", ku: "Nûgerî", def: "Afirandina raman an amûrên nû ku pirsgirêkan çareser dikin." }
+    ];
+
+    function displayTerms(filteredTerms) {
+        const grid = document.getElementById('dictionaryGrid');
+        grid.innerHTML = '';
+
+        if (filteredTerms.length === 0) {
+            grid.innerHTML = '<div class="no-results">Peyv nehat dîtin! (لم يتم العثور على الكلمة)</div>';
+            return;
+        }
+
+        filteredTerms.forEach(item => {
+            const card = `
+                <div class="term-card">
+                    <div class="en-term">${item.en}</div>
+                    <div class="ku-term">${item.ku}</div>
+                    <div class="def">${item.def}</div>
+                </div>
+            `;
+            grid.innerHTML += card;
+        });
+    }
+
+    function searchDictionary() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = terms.filter(item => 
+            item.en.toLowerCase().includes(query) || 
+            item.ku.toLowerCase().includes(query)
+        );
+        displayTerms(filtered);
+    }
+
+    // العرض الأولي عند فتح الصفحة
+    displayTerms(terms);
+</script>
+
+</body>
+</html>
