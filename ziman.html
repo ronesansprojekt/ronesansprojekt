@@ -6,6 +6,11 @@
     <title>Ziman | Ronesans Projêkt</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* كود أساسي لمنع خروج العناصر عن الشاشة */
+        * {
+            box-sizing: border-box;
+        }
+
         :root {
             --dark-blue: #022D44;
             --deep-blue: #0B1D26;
@@ -19,9 +24,9 @@
             font-family: 'Montserrat', sans-serif;
             background: var(--light-grey);
             color: var(--deep-blue);
+            overflow-x: hidden; /* يمنع التمرير الجانبي */
         }
 
-        /* Header الثابت بالهوية البصرية */
         header {
             background: var(--dark-blue);
             padding: 0.9rem 5%;
@@ -46,9 +51,8 @@
 
         .back-btn:hover { background: var(--bright-yellow); color: var(--dark-blue); }
 
-        .logo-area img { height: 60px; display: block; }
+        .logo-area img { height: 50px; display: block; }
 
-        /* Hero Section مع خلفية المشروع */
         .ziman-hero {
             position: relative;
             background-image: url('hero-ziman.png');
@@ -73,15 +77,16 @@
         }
 
         .ziman-hero h1, .ziman-hero p { position: relative; z-index: 2; }
-        .ziman-hero h1 { font-size: 2.5rem; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .ziman-hero h1 { font-size: 2.2rem; margin: 0; font-weight: 800; letter-spacing: 1px; }
 
-        /* مربع البحث الذكي */
+        /* إصلاح مربع البحث ليتناسب مع الهواتف */
         .search-container {
+            width: 100%;
             max-width: 700px;
             margin: -35px auto 40px;
             position: relative;
             z-index: 5;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         .search-wrapper {
@@ -89,18 +94,20 @@
             padding: 8px;
             display: flex;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border-radius: 50px; /* تصميم عصري بيضاوي */
+            border-radius: 50px;
             border: 2px solid var(--bright-yellow);
+            width: 100%;
         }
 
         #searchInput {
             flex: 1;
             border: none;
-            padding: 15px 25px;
-            font-size: 1.1rem;
+            padding: 15px 20px;
+            font-size: 1rem;
             outline: none;
             font-family: inherit;
             border-radius: 50px;
+            width: 100%;
         }
 
         .search-btn {
@@ -112,22 +119,55 @@
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
+            white-space: nowrap;
         }
 
-        .search-btn:hover { background: var(--deep-blue); }
+        /* كود خاص بشاشات الهواتف (لإصلاح خروج الزر) */
+        @media (max-width: 600px) {
+            .search-wrapper {
+                flex-direction: column;
+                border-radius: 15px;
+                padding: 12px;
+            }
+            #searchInput, .search-btn {
+                border-radius: 10px;
+                padding: 15px;
+                text-align: center;
+            }
+            .search-btn {
+                margin-top: 8px;
+            }
+        }
 
-        /* نتائج القاموس (API) */
         .dictionary-grid {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto 60px;
             padding: 20px;
         }
 
+        /* تنسيق الأقسام الخمسة */
+        .category-title {
+            width: 100%;
+            color: var(--dark-blue);
+            border-bottom: 3px solid var(--bright-yellow);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .words-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
         .term-card {
             background: white;
-            padding: 30px;
-            border-left: 8px solid var(--bright-yellow);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-left: 6px solid var(--dark-blue);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             animation: fadeIn 0.5s ease;
         }
 
@@ -146,10 +186,10 @@
             text-transform: uppercase;
         }
 
-        .ku-term { font-size: 2rem; color: var(--dark-blue); font-weight: 800; margin: 15px 0; }
-        .def { font-size: 1.05rem; color: #444; line-height: 1.8; }
+        .ku-term { font-size: 1.6rem; color: var(--dark-blue); font-weight: 800; margin: 10px 0; }
+        .def { font-size: 0.95rem; color: #444; line-height: 1.6; }
 
-        .loading-text { text-align: center; color: var(--dark-blue); font-weight: 600; }
+        .loading-text { text-align: center; color: var(--dark-blue); font-weight: 600; padding: 40px; }
     </style>
 </head>
 <body>
@@ -163,52 +203,98 @@
 
 <section class="ziman-hero">
     <h1>Navenda Ziman</h1>
-    <p>Lêgerîna zindî di Wîkîferhengê de</p>
+    <p>Lêgerîna zindî û perwerdehiya otomatîk</p>
 </section>
 
 <div class="search-container">
     <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="Peyvekê binivîse... (mînak: Afrandin)" onkeypress="handleKeyPress(event)">
+        <input type="text" id="searchInput" placeholder="Peyvekê binivîse... (mînak: Afrandin)" onkeyup="checkEmptySearch(event)">
         <button class="search-btn" onclick="fetchFromWiki()">LÊGERÎN</button>
     </div>
 </div>
 
 <div class="dictionary-grid" id="dictionaryGrid">
-    <!-- Nîşandanê encaman li vir e -->
+    <!-- المحتوى سيظهر هنا تلقائياً -->
 </div>
 
 <script>
-    function handleKeyPress(e) {
-        if (e.key === 'Enter') fetchFromWiki();
+    // القاعدة المحلية (تظهر الأقسام عند فتح الصفحة)
+    const localDatabase = [
+        { word: "A, B, C", cat: "Tîpên Kurdî", def: "Esasên alfabeya kurdî ya latînî." },
+        { word: "Rêziman", cat: "Rêziman", def: "Qanûn û rêbazên avakirina hevokan di ziman de." },
+        { word: "Rind", cat: "Hevalnav û Daçek", def: "Taybetmendiya tiştên bedew û baş." },
+        { word: "Afrandin", cat: "Lêker", def: "Çalakiya anîna hebûnê; çêkirina tiştekî nû." },
+        { word: "Ziman", cat: "Nav", def: "Amûrê ragihandinê yê sereke di navbera mirovan de." },
+        { word: "Nermalav", cat: "Pêşxistina Ziman", def: "Termê nûjen ji bo bernameyên dîjîtal (Software)." }
+    ];
+
+    // دالة لعرض الأقسام الخمسة
+    function showLocalDictionary() {
+        const grid = document.getElementById('dictionaryGrid');
+        grid.innerHTML = '';
+        
+        const categories = ["Tîpên Kurdî", "Rêziman", "Hevalnav û Daçek", "Lêker", "Nav", "Pêşxistina Ziman"];
+        
+        categories.forEach(cat => {
+            const filtered = localDatabase.filter(w => w.cat === cat);
+            if(filtered.length > 0) {
+                grid.innerHTML += `<h2 class="category-title">${cat}</h2>`;
+                
+                const wordsHTML = filtered.map(w => `
+                    <div class="term-card">
+                        <span class="category-tag">${w.cat}</span>
+                        <div class="ku-term">${w.word}</div>
+                        <div class="def">${w.def}</div>
+                    </div>
+                `).join('');
+                
+                grid.innerHTML += `<div class="words-container">${wordsHTML}</div>`;
+            }
+        });
     }
 
+    // دالة للعودة للأقسام إذا تم مسح البحث
+    function checkEmptySearch(e) {
+        if (e.key === 'Enter') {
+            fetchFromWiki();
+        } else if (document.getElementById('searchInput').value.trim() === '') {
+            showLocalDictionary();
+        }
+    }
+
+    // دالة جلب الكلمات من Wîkîferheng عند البحث
     async function fetchFromWiki() {
         const word = document.getElementById('searchInput').value.trim();
         const grid = document.getElementById('dictionaryGrid');
 
-        if (!word) return;
+        if (!word) {
+            showLocalDictionary();
+            return;
+        }
 
         grid.innerHTML = '<p class="loading-text">Li benda encamê be...</p>';
 
-        // API ya Wîkîferheng (MediaWiki API)
         const url = `https://ku.wiktionary.org/api/rest_v1/page/definition/${word}`;
 
         try {
             const response = await fetch(url);
-            if (!response.ok) throw new Error("Peyv nehat dîtin");
+            if (!response.ok) throw new Error("Not Found");
             
             const data = await response.json();
             
             if (data && data.ku) {
                 const entry = data.ku[0];
-                const category = entry.partOfSpeech;
-                const definition = entry.definitions[0].definition.replace(/<[^>]*>?/gm, ''); // Paqijkirina HTML
+                const category = entry.partOfSpeech || "Nenas";
+                const definition = entry.definitions[0].definition.replace(/<[^>]*>?/gm, '');
 
                 grid.innerHTML = `
-                    <div class="term-card">
-                        <span class="category-tag">${category}</span>
-                        <div class="ku-term">${word}</div>
-                        <div class="def">${definition}</div>
+                    <h2 class="category-title">Encama Lêgerînê</h2>
+                    <div class="words-container">
+                        <div class="term-card" style="border-left-color: var(--bright-yellow);">
+                            <span class="category-tag">WÎKÎFERHENG: ${category}</span>
+                            <div class="ku-term">${word}</div>
+                            <div class="def">${definition}</div>
+                        </div>
                     </div>
                 `;
             } else {
@@ -218,6 +304,9 @@
             grid.innerHTML = '<p class="loading-text">Heta niha ev peyv nehatiye zêdekirin.</p>';
         }
     }
+
+    // تشغيل الأقسام الخمسة فور فتح الصفحة
+    showLocalDictionary();
 </script>
 
 </body>
