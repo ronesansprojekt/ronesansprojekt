@@ -424,21 +424,26 @@
             nûjen, dîtbarî û profesyonel ji nû ve bîne pêşiya cîhanê.  
         </h1>  
 
-        <button class="more-btn" onclick=function toggleMore(btn) {
+     <script>
+function toggleMore(btn) {
 
+    const moreText = document.querySelector("#heroMore .more-text");
     const box = document.getElementById("heroMore");
 
-    if (box.style.display === "block") {
+    if (moreText.style.display === "inline") {
 
+        moreText.style.display = "none";
         box.style.display = "none";
         btn.textContent = "ZÊDETIR";
 
     } else {
 
         box.style.display = "block";
+        moreText.style.display = "inline";
         btn.textContent = "KÊMTIR";
     }
-}  
+}
+</script>  
 
         <div class="hero-more" id="heroMore">  
 
