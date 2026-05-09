@@ -19,6 +19,9 @@
             font-family: 'Montserrat', sans-serif;
             background: var(--light-grey);
             color: var(--deep-blue);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Header */
@@ -122,6 +125,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
+            flex: 1;
         }
 
         .term-card {
@@ -148,6 +152,25 @@
             padding: 40px;
             color: #888;
         }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 4px solid var(--bright-yellow);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        footer span {
+            color: var(--bright-yellow);
+            display: block;
+            margin-top: 5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -171,6 +194,10 @@
 </div>
 
 <div class="dictionary-grid" id="dictionaryGrid"></div>
+
+<footer>
+    © 2026 Ronesans Projêkt - <span>BER BI PÊŞEROJÊ VE</span>
+</footer>
 
 <script>
     // الأقسام المحدثة بالكردية والإنكليزية فقط
