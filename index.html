@@ -53,7 +53,7 @@
     }  
 
     .logo-area img {  
-        height: 75px;  
+        height: 100px;  
         display: block;  
     }  
 
@@ -405,7 +405,8 @@
             <option>Kurdî</option>  
             <option>English</option>  
             <option>Türkçe</option>  
-            <option>Deutsch</option>  
+            <option>Deutsch</option>
+            <option>العربية</option>  
         </select>  
     </div>  
 
@@ -423,9 +424,21 @@
             nûjen, dîtbarî û profesyonel ji nû ve bîne pêşiya cîhanê.  
         </h1>  
 
-        <button class="more-btn" onclick="toggleMore()">  
-            ZÊDETIR  
-        </button>  
+        <button class="more-btn" onclick=function toggleMore(btn) {
+
+    const box = document.getElementById("heroMore");
+
+    if (box.style.display === "block") {
+
+        box.style.display = "none";
+        btn.textContent = "ZÊDETIR";
+
+    } else {
+
+        box.style.display = "block";
+        btn.textContent = "KÊMTIR";
+    }
+}  
 
         <div class="hero-more" id="heroMore">  
 
@@ -470,8 +483,11 @@
 <div class="main-content">  
 
     <div class="card">  
-        <div class="pixel-icon">✦</div>  
-
+        <div class="pixel-icon">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+        <path d="M4 4h16v2H4zm0 6h10v2H4zm0 6h16v2H4z"/>
+    </svg>
+</div>
         <h3>ZIMAN</h3>  
 
         <p>  
@@ -481,7 +497,11 @@
     </div>  
 
     <div class="card">  
-        <div class="pixel-icon">◈</div>  
+        <div class="pixel-icon">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+        <path d="M12 2l4 4h-3v6h-2V6H8zM4 20h16v2H4z"/>
+    </svg>
+</div>  
 
         <h3>ÇAND</h3>  
 
@@ -492,7 +512,11 @@
     </div>  
 
     <div class="card">  
-        <div class="pixel-icon">▶</div>  
+        <div class="pixel-icon">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+    </svg>
+</div>  
 
         <h3>MEDYA</h3>  
 
@@ -503,7 +527,11 @@
     </div>  
 
     <div class="card">  
-        <div class="pixel-icon">✹</div>  
+        <div class="pixel-icon">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+        <path d="M9 2h6v2h-1v6.5l4.5 7.5H5.5L10 10.5V4H9z"/>
+    </svg>
+</div>  
 
         <h3>ZANIST</h3>  
 
@@ -514,7 +542,11 @@
     </div>  
 
     <div class="card">  
-        <div class="pixel-icon">⌁</div>  
+        <div class="pixel-icon">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+        <path d="M12 2a7 7 0 00-4 12.7V18h8v-3.3A7 7 0 0012 2zM9 20h6v2H9z"/>
+    </svg>
+</div>  
 
         <h3>FIKIR</h3>  
 
