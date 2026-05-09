@@ -21,7 +21,7 @@
             color: var(--deep-blue);
         }
 
-        /* Header */
+        /* Header الثابت بالهوية البصرية */
         header {
             background: var(--dark-blue);
             padding: 0.9rem 5%;
@@ -44,31 +44,24 @@
             transition: 0.3s;
         }
 
-        .back-btn:hover {
-            background: var(--bright-yellow);
-            color: var(--dark-blue);
-        }
+        .back-btn:hover { background: var(--bright-yellow); color: var(--dark-blue); }
 
-        .logo-area img {
-            height: 60px;
-            display: block;
-        }
+        .logo-area img { height: 60px; display: block; }
 
-        /* Hero Ziman */
+        /* Hero Section مع خلفية المشروع */
         .ziman-hero {
             position: relative;
             background-image: url('hero-ziman.png');
             background-size: cover;
             background-position: center;
-            min-height: 300px;
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             text-align: center;
             color: white;
-            overflow: hidden;
             border-bottom: 6px solid var(--bright-yellow);
         }
 
@@ -76,22 +69,16 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(rgba(2, 45, 68, 0.75), rgba(11, 29, 38, 0.85));
-            z-index: 1;
+            background: linear-gradient(rgba(2, 45, 68, 0.8), rgba(11, 29, 38, 0.9));
         }
 
-        .ziman-hero h1, .ziman-hero p {
-            position: relative;
-            z-index: 2;
-        }
+        .ziman-hero h1, .ziman-hero p { position: relative; z-index: 2; }
+        .ziman-hero h1 { font-size: 2.5rem; margin: 0; font-weight: 800; letter-spacing: 1px; }
 
-        .ziman-hero h1 { font-size: 2.5rem; margin: 0; font-weight: 800; }
-        .ziman-hero p { opacity: 0.9; margin-top: 10px; font-weight: 500; }
-
-        /* Search Section */
+        /* مربع البحث الذكي */
         .search-container {
-            max-width: 800px;
-            margin: -40px auto 40px;
+            max-width: 700px;
+            margin: -35px auto 40px;
             position: relative;
             z-index: 5;
             padding: 0 20px;
@@ -99,55 +86,70 @@
 
         .search-wrapper {
             background: white;
-            padding: 10px;
+            padding: 8px;
             display: flex;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-radius: 50px; /* تصميم عصري بيضاوي */
+            border: 2px solid var(--bright-yellow);
         }
 
         #searchInput {
             flex: 1;
             border: none;
-            padding: 15px;
+            padding: 15px 25px;
             font-size: 1.1rem;
             outline: none;
             font-family: inherit;
+            border-radius: 50px;
         }
 
-        /* Dictionary Grid */
+        .search-btn {
+            background: var(--dark-blue);
+            color: var(--bright-yellow);
+            border: none;
+            padding: 0 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover { background: var(--deep-blue); }
+
+        /* نتائج القاموس (API) */
         .dictionary-grid {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto 60px;
             padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
         }
 
         .term-card {
             background: white;
-            padding: 25px;
-            border-left: 6px solid var(--dark-blue);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            cursor: pointer;
+            padding: 30px;
+            border-left: 8px solid var(--bright-yellow);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            animation: fadeIn 0.5s ease;
         }
 
-        .term-card:hover {
-            transform: translateY(-5px);
-            border-left-color: var(--bright-yellow);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .category-tag { font-size: 0.7rem; color: #F18805; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .ku-term { font-size: 1.4rem; color: var(--dark-blue); font-weight: 700; margin: 5px 0; }
-        .def { font-size: 0.9rem; color: #555; line-height: 1.5; }
-
-        .no-results {
-            text-align: center;
-            grid-column: 1 / -1;
-            padding: 40px;
-            color: #888;
+        .category-tag { 
+            font-size: 0.75rem; 
+            color: var(--dark-blue); 
+            background: var(--light-grey);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 800; 
+            text-transform: uppercase;
         }
+
+        .ku-term { font-size: 2rem; color: var(--dark-blue); font-weight: 800; margin: 15px 0; }
+        .def { font-size: 1.05rem; color: #444; line-height: 1.8; }
+
+        .loading-text { text-align: center; color: var(--dark-blue); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -155,65 +157,67 @@
 <header>
     <a href="index.html" class="back-btn">← VEGERANDIN</a>
     <div class="logo-area">
-        <img src="logo.png" alt="Ronesans Projêkt">
+        <img src="logo.png" alt="Ronesans Logo">
     </div>
 </header>
 
 <section class="ziman-hero">
     <h1>Navenda Ziman</h1>
-    <p>Pêvajoya nûjenkirina zimanê kurdî</p>
+    <p>Lêgerîna zindî di Wîkîferhengê de</p>
 </section>
 
 <div class="search-container">
     <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="Li peyvê bigere..." onkeyup="searchDictionary()">
+        <input type="text" id="searchInput" placeholder="Peyvekê binivîse... (mînak: Afrandin)" onkeypress="handleKeyPress(event)">
+        <button class="search-btn" onclick="fetchFromWiki()">LÊGERÎN</button>
     </div>
 </div>
 
-<div class="dictionary-grid" id="dictionaryGrid"></div>
+<div class="dictionary-grid" id="dictionaryGrid">
+    <!-- Nîşandanê encaman li vir e -->
+</div>
 
 <script>
-    // الأقسام المحدثة بالكردية والإنكليزية فقط
-    const terms = [
-        { cat: "Alphabet", ku: "Tîpên Kurdî", def: "Naskirina herf û dengên taybet ên zimanê kurdî." },
-        { cat: "Grammar", ku: "Rêziman", def: "Bingehên rêzimana kurmancî û qaîdeyên nivîsê." },
-        { cat: "Adjectives", ku: "Hevalnav û Daçek", def: "Taybetmendiyên peyvan û girêdanên nav hevokan." },
-        { cat: "Verbs", ku: "Lêker", def: "Demên lêkeran û awayên kofîkirina wan di kurdî de." },
-        { cat: "Nouns", ku: "Nav", def: "Kategoriyên navan; nêr, mê û yekjimar/pirjimar." },
-        { cat: "Development", ku: "Pêşxistina Ziman", def: "Termên nûjen û rêbazên dewlemendkirina zimanê kurdî." }
-    ];
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') fetchFromWiki();
+    }
 
-    function displayTerms(filteredTerms) {
+    async function fetchFromWiki() {
+        const word = document.getElementById('searchInput').value.trim();
         const grid = document.getElementById('dictionaryGrid');
-        grid.innerHTML = '';
 
-        if (filteredTerms.length === 0) {
-            grid.innerHTML = '<div class="no-results">Peyv nehat dîtin!</div>';
-            return;
+        if (!word) return;
+
+        grid.innerHTML = '<p class="loading-text">Li benda encamê be...</p>';
+
+        // API ya Wîkîferheng (MediaWiki API)
+        const url = `https://ku.wiktionary.org/api/rest_v1/page/definition/${word}`;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Peyv nehat dîtin");
+            
+            const data = await response.json();
+            
+            if (data && data.ku) {
+                const entry = data.ku[0];
+                const category = entry.partOfSpeech;
+                const definition = entry.definitions[0].definition.replace(/<[^>]*>?/gm, ''); // Paqijkirina HTML
+
+                grid.innerHTML = `
+                    <div class="term-card">
+                        <span class="category-tag">${category}</span>
+                        <div class="ku-term">${word}</div>
+                        <div class="def">${definition}</div>
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = '<p class="loading-text">Bibore! Ev peyv di sîstemê de tuneye.</p>';
+            }
+        } catch (error) {
+            grid.innerHTML = '<p class="loading-text">Heta niha ev peyv nehatiye zêdekirin.</p>';
         }
-
-        filteredTerms.forEach(item => {
-            const card = `
-                <div class="term-card">
-                    <div class="category-tag">${item.cat}</div>
-                    <div class="ku-term">${item.ku}</div>
-                    <div class="def">${item.def}</div>
-                </div>
-            `;
-            grid.innerHTML += card;
-        });
     }
-
-    function searchDictionary() {
-        const query = document.getElementById('searchInput').value.toLowerCase();
-        const filtered = terms.filter(item => 
-            item.cat.toLowerCase().includes(query) || 
-            item.ku.toLowerCase().includes(query)
-        );
-        displayTerms(filtered);
-    }
-
-    displayTerms(terms);
 </script>
 
 </body>
